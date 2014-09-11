@@ -13,7 +13,7 @@ _server.use(_bodyParser.urlencoded({ extended: false }));
 _server.use(_cookieParser());
 _server.use(_express.static(_path.join(__dirname, 'public')));
 
-_server.set('port', process.env.PORT || (80));
+_server.set('port', process.env.PORT || (8080));
 
 var _server = _server.listen(_server.get('port'), function() {
   _logger.info('server listening on port ' + _server.address().port);
