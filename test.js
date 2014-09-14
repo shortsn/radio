@@ -16,6 +16,15 @@ function write() {
         function(callback) {
             delayedWrite(15, true, callback);
         },
+        function(callback) {
+            delayedWrite(15, false, callback);
+        },
+        function(callback) {
+            delayedWrite(15, true, callback);
+        },
+        function(callback) {
+            delayedWrite(15, false, callback);
+        },
     ], function(err, results) {
         console.log('Writes complete, pause then unexport pins');
         setTimeout(function() {
