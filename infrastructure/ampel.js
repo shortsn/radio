@@ -20,7 +20,7 @@ function Ampel(logger) {
       gpio.setup(18, gpio.DIR_OUT, callback);
     },
     ], function(err, results) {
-      if (err !== null) {
+      if (err) {
         _logger.error(err);
       }
       _logger.info('ampel -> initialized');
@@ -34,7 +34,7 @@ function Ampel(logger) {
     }
 
     gpio.write(15, value, function(){
-      _red = value;
+      this._red = value;
     });
   };
 
@@ -44,7 +44,7 @@ function Ampel(logger) {
     }
 
     gpio.write(16, value, function(){
-      _green = value;
+      this._green = value;
     });
   };
 
@@ -54,13 +54,13 @@ function Ampel(logger) {
     }
 
     gpio.write(18, value, function(){
-      _yellow = value;
+      this._yellow = value;
     });
   };
 
   Ampel.prototype.exit = function() {
     gpio.destroy(function() {
-        _logger.log('closed pins, now exit');
+        this._logger.log('closed pins, now exit');
         return process.exit(0);
     });
   };
