@@ -2,12 +2,10 @@ var gpio = require('rpi-gpio');
 var async = require('async');
 
 function Ampel(logger) {
-  var _logger = logger;
-  var _initialized = false;
-
-  var _red = false;
-  var _yellow = false;
-  var _green = false;
+  this._red = false;
+  this._yellow = false;
+  this._green = false;
+  this._logger = logger;
 
   async.parallel([
     function(callback) {
@@ -21,38 +19,39 @@ function Ampel(logger) {
     },
     ], function(err, results) {
       if (err) {
-        _logger.error(err);
+        logger.error(err);
       }
-      _logger.info('ampel -> initialized');
-      _initialized = true;
+      logger.info('ampel -> initialized');
     });
   }
 
   Ampel.prototype.setRed = function(value) {
-    if (!this._initialized){
+    if (this._initialized === false){
       return;
     }
-    _logger.debug('writing red -> '+ value);
+
+    this._logger.log( this._initialized);
+    this._logger.log('writing red -> '+ value);
     gpio.write(15, value, function(){
       this._red = value;
     });
   };
 
   Ampel.prototype.setGreen = function(value) {
-    if (!this._initialized){
+    if (this._initialized === false){
       return;
     }
-    _logger.debug('writing green -> '+ value);
+    this._logger.log('writing green -> '+ value);
     gpio.write(16, value, function(){
       this._green = value;
     });
   };
 
   Ampel.prototype.setYellow = function(value) {
-    if (!this._initialized){
+    if (this._initialized === false){
       return;
     }
-    _logger.debug('writing yellow -> '+ value);
+    this._logger.log('writing yellow -> '+ value);
     gpio.write(18, value, function(){
       this._yellow = value;
     });
