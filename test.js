@@ -5,6 +5,12 @@ async.parallel([
     function(callback) {
         gpio.setup(15, gpio.DIR_OUT, callback);
     },
+    function(callback) {
+        gpio.setup(16, gpio.DIR_OUT, callback);
+    },
+    function(callback) {
+        gpio.setup(18, gpio.DIR_OUT, callback);
+    },
 ], function(err, results) {
 	console.log(err);
   console.log('Pins set up');
@@ -17,13 +23,10 @@ function write() {
             delayedWrite(15, true, callback);
         },
         function(callback) {
-            delayedWrite(15, false, callback);
+            delayedWrite(16, true, callback);
         },
         function(callback) {
-            delayedWrite(15, true, callback);
-        },
-        function(callback) {
-            delayedWrite(15, false, callback);
+            delayedWrite(18, true, callback);
         },
     ], function(err, results) {
         console.log('Writes complete, pause then unexport pins');
