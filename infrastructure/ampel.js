@@ -32,7 +32,7 @@ function Ampel(logger) {
     if (!this._initialized){
       return;
     }
-
+    _logger.debug('writing red -> '+ value);
     gpio.write(15, value, function(){
       this._red = value;
     });
@@ -42,7 +42,7 @@ function Ampel(logger) {
     if (!this._initialized){
       return;
     }
-
+    _logger.debug('writing green -> '+ value);
     gpio.write(16, value, function(){
       this._green = value;
     });
@@ -52,7 +52,7 @@ function Ampel(logger) {
     if (!this._initialized){
       return;
     }
-
+    _logger.debug('writing yellow -> '+ value);
     gpio.write(18, value, function(){
       this._yellow = value;
     });
