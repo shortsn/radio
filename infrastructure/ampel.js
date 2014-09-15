@@ -7,12 +7,16 @@ function Ampel(logger) {
   this._green = false;
   this._logger = logger;
 
+  gpio.on('change', function(channel, value) {
+      logger.log('Channel ' + channel + ' value is now ' + value);
+  });
+
   async.parallel([
     function(callback) {
       gpio.setup(15, gpio.DIR_OUT, callback);
     },
     function(callback) {
-      gpio.setup(16, gpio.DIR_OUT, callback);
+      gpio.setup(16, gpio.DIR_IN, callback);
     },
     function(callback) {
       gpio.setup(18, gpio.DIR_OUT, callback);
