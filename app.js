@@ -21,9 +21,8 @@ _server.get('/api/red', function(req, res){
   res.send('OK');
 });
 
-_server.get('/api/yellow', function(req, res){
-  _ampel.setYellow(true);
-  res.send('OK');
+_server.get('/api/exit', function(req, res){
+  _ampel.exit();
 });
 
 _server.get('/api/green', function(req, res){
