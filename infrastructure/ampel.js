@@ -8,7 +8,7 @@ function Ampel(logger) {
   this._logger = logger;
 
   gpio.on('change', function(channel, value) {
-      logger.log('Channel ' + channel + ' value is now ' + value);
+      logger.info('Channel ' + channel + ' value is now ' + value);
   });
 
   async.parallel([
