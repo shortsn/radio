@@ -46,18 +46,8 @@ function Ampel(logger) {
       return;
     }
     this._logger.log('writing green -> '+ value);
-    gpio.write(16, value, function(){
-      this._green = value;
-    });
-  };
-
-  Ampel.prototype.setYellow = function(value) {
-    if (this._initialized === false){
-      return;
-    }
-    this._logger.log('writing yellow -> '+ value);
     gpio.write(18, value, function(){
-      this._yellow = value;
+      this._green = value;
     });
   };
 
