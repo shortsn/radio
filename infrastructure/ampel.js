@@ -52,8 +52,8 @@ function Ampel(logger) {
   };
 
   Ampel.prototype.exit = function() {
+    this._logger.log('closed pins, now exit');
     gpio.destroy(function() {
-        this._logger.log('closed pins, now exit');
         return process.exit(0);
     });
   };
