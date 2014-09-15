@@ -7,10 +7,16 @@ function Ampel(logger) {
   this._green = false;
   this._logger = logger;
 
-  function readInput() {
-    gpio.read(16, function(err, value) {
+
+  function Read() {
+    setTimeout(gpio.read(16, function(err, value) {
+        if (err){
+          logger.error(err);
+        }
         logger.info('The value is ' + value);
-    });
+      }, 10)
+    );
+    Read();
   }
 
   async.parallel([
@@ -18,7 +24,7 @@ function Ampel(logger) {
       gpio.setup(15, gpio.DIR_OUT, callback);
     },
     function(callback) {
-      gpio.setup(16, gpio.DIR_IN, readInput);
+      gpio.setup(16, gpio.DIR_IN, Read);
     },
     function(callback) {
       gpio.setup(18, gpio.DIR_OUT, callback);
