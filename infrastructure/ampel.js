@@ -7,16 +7,18 @@ function Ampel(logger) {
   this._green = false;
   this._logger = logger;
 
-  gpio.on('change', function(channel, value) {
-      logger.info('Channel ' + channel + ' value is now ' + value);
-  });
+  function readInput() {
+    gpio.read(16, function(err, value) {
+        logger.info('The value is ' + value);
+    });
+  }
 
   async.parallel([
     function(callback) {
       gpio.setup(15, gpio.DIR_OUT, callback);
     },
     function(callback) {
-      gpio.setup(16, gpio.DIR_IN, callback);
+      gpio.setup(16, gpio.DIR_IN, readInput);
     },
     function(callback) {
       gpio.setup(18, gpio.DIR_OUT, callback);
@@ -34,8 +36,8 @@ function Ampel(logger) {
       return;
     }
 
-    this._logger.log( this._initialized);
-    this._logger.log('writing red -> '+ value);
+    this._logger.info( this._initialized);
+    this._logger.info('writing red -> '+ value);
     gpio.write(15, value, function(){
       this._red = value;
     });
@@ -45,14 +47,14 @@ function Ampel(logger) {
     if (this._initialized === false){
       return;
     }
-    this._logger.log('writing green -> '+ value);
+    this._logger.info('writing green -> '+ value);
     gpio.write(18, value, function(){
       this._green = value;
     });
   };
 
   Ampel.prototype.exit = function() {
-    this._logger.log('closed pins, now exit');
+    this._logger.info('closed pins, now exit');
     gpio.destroy(function() {
         return process.exit(0);
     });
