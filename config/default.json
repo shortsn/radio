@@ -1,0 +1,16 @@
+{
+  "logging": {
+    "file": {
+      "level": "info",
+      "name": "./logfile.log"
+    },
+    "console" : {
+      "level" : "debug"
+    }
+  },
+  "components":{
+    "input" : {
+      "enabled" : false
+    }
+  }
+}
