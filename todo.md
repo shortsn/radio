@@ -1,15 +1,15 @@
 Input
 =====
-#####Potentiometer
-- [ ] Lautstärke (0-100)
-- [ ] Höhen  (0-100)
-- [ ] Bässe  (0-100)
+#####Potentiometer (0-100)
+- [ ] Lautstärke
+- [ ] Höhen
+- [ ] Bässe
 - [ ] UW
 - [ ] LW / MW
 
-#####Schalter
-- [ ] Aus (true/false)
-- [ ] TA (true/false)
-- [ ] LW (true/false)
-- [ ] MW (true/false)
-- [ ] UW (true/false)
+#####Schalter (true/false)
+- [ ] Aus
+- [ ] TA
+- [ ] LW
+- [ ] MW
+- [ ] UW
