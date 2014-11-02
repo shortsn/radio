@@ -8,7 +8,6 @@
   "dependencies": {
     "async": "^0.9.0",
     "config": "^1.2.1",
-    "loudness": "^0.2.1",
     "onoff": "^0.3.2",
     "spi": "^0.1.2",
     "winston": "^0.7.3"
