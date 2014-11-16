@@ -46,24 +46,19 @@ module.exports = {
   observeSPI : function(){
     return Rx.Observable.create(function (observer) {
       var timer;
-      new SPI.Spi('/dev/spidev0.0', { }, function(spi){
+      var spi = new SPI.Spi('/dev/spidev0.0', { }, function(spi){
         spi.open();
         timer = Rx.Observable
         .timer(0, 500)
         .subscribe(function (x) {
           console.log('Next: ' + x);
-        },
-        function (err) {
-          observer.onError(err);
-        },
-        function () {
-          spi.close();
-          console.log('Completed');
+
         });
       });
 
       return function () {
         if (timer !== undefined) timer.dispose();
+        spi.close();
       };
     }).publish()
     .refCount();
