@@ -1,3 +1,4 @@
+var Rx = require('rx');
 var input = require('./rx_test');
 
 var stream = input.observeGPIO(18, 'both');
