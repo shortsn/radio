@@ -1,33 +1,12 @@
-var Rx = require('rx');
+var input = require('./rx_test');
 
+var stream = input.observeGPIO(18, 'both');
 
+var subscription1 = stream.subscribe(createObserver('SourceA'));
 
-var stream = Rx.Observable.create(function (observer) {
-  observer.onNext('foo');
-  observer.onNext('bar');
-  observer.onNext('foobar');
-
-  return function () {
-    console.log('disposed');
-  };
-})
-.publish()
-.refCount();
-
-var source =  Rx.Observable.return('init').concat(stream);
-
-var subscription1 = source.subscribe(createObserver('SourceA'));
-var subscription2 = source.subscribe(createObserver('SourceB'));
-
-subscription1.dispose();
-subscription2.dispose();
-
-subscription1 = source.subscribe(createObserver('SourceA'));
-subscription2 = source.subscribe(createObserver('SourceB'));
-
-subscription1.dispose();
-subscription2.dispose();
-
+function cleanup(){
+  subscription1.dispose();
+}
 
 function createObserver(tag) {
   return Rx.Observer.create(
@@ -41,3 +20,7 @@ function createObserver(tag) {
       console.log('Completed');
     });
   }
+
+process.on('exit', cleanup);
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
