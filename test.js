@@ -3,10 +3,14 @@ var input = require('./rx_test');
 
 var stream = input.observeGPIO(18, 'both');
 
-var subscription1 = stream.subscribe(createObserver('SourceA'));
+//var stream = input.observeSPI();
+
+var subscription1 = stream.subscribe(createObserver('A '));
+var subscription2 = stream.subscribe(createObserver('B '));
 
 function cleanup(){
   subscription1.dispose();
+  subscription2.dispose();
 }
 
 function createObserver(tag) {
